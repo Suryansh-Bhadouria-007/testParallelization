@@ -24,7 +24,7 @@ node {
                 Check console output at $BUILD_URL to view the results.
                 ${BUILD_LOG}  ${err}''',
                 subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!',
-                to: 'bhadouri@adobe.com'
+                to: 'suryanshbhadouria@gmail.com'
     }
 }
 

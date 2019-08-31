@@ -1,4 +1,4 @@
-import com.adobe.campaign.App;
+import com.campaign.App;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

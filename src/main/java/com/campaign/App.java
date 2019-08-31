@@ -1,4 +1,4 @@
-package com.adobe.campaign;
+package com.campaign;
 
 public class App {
     public boolean m0() throws InterruptedException {
