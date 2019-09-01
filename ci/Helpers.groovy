@@ -26,16 +26,18 @@ def runTests() {
                 //mvn 'clean'
                 sh "${mvnHome}/bin/mvn clean "
 
+//                def mavenInstall = 'install -DMaven.test.failure.ignore=true  -Dsurefire.includesFile=inclusions.txt -Dsurefire.excludesFile=exclusions.txt'
+
                 def mavenInstall = 'install -DMaven.test.failure.ignore=true'
 
                 /* Write includesFile or excludesFile for tests.  Split record provided by splitTests. */
                 /* Tell Maven to read the appropriate file. */
                 if (split.includes) {
-                    writeFile file: "target/parallel-test-includes-${i}.txt", text: split.list.join("\n")
-                    mavenInstall += " -Dsurefire.includesFile=target/parallel-test-includes-${i}.txt"
+                    writeFile file: "inclusions.txt", text: split.list.join("\n")
+//                    mavenInstall += " -Dsurefire.includesFile=target/parallel-test-includes-${i}.txt"
                 } else {
-                    writeFile file: "target/parallel-test-excludes-${i}.txt", text: split.list.join("\n")
-                    mavenInstall += " -Dsurefire.excludesFile=target/parallel-test-excludes-${i}.txt"
+                    writeFile file: "exclusions.txt", text: split.list.join("\n")
+//                    mavenInstall += " -Dsurefire.excludesFile=target/parallel-test-excludes-${i}.txt"
                 }
 
                 /* Call the Maven build with tests. */
