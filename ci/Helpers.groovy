@@ -48,7 +48,7 @@ def runTests() {
         }
     }
     println("testGroups:${testGroups}")
-//    parallel testGroups
+    parallel testGroups
 }
 
 return this
