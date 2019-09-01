@@ -3,7 +3,7 @@ def runTests() {
     /* see https://wiki.jenkins-ci.org/display/JENKINS/Parallel+Test+Executor+Plugin and demo on github
     /* Using arbitrary parallelism of 5 and "generateInclusions" feature added in v1.8. */
     def splits = splitTests parallelism: [$class: 'CountDrivenParallelism', size: 5], generateInclusions: true
-    echo splits
+    println("splits:${splits}")
     def mvnHome = tool name: 'Maven 3.5.0', type: 'maven'
     /* Create dictionary to hold set of parallel test executions. */
     def testGroups = [:]
@@ -47,7 +47,7 @@ def runTests() {
             }
         }
     }
-    echo testGroups
+    println("testGroups:${testGroups}")
 //    parallel testGroups
 }
 
