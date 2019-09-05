@@ -12,11 +12,11 @@ node {
             def mvnHome = tool name: 'Maven 3.5.0', type: 'maven'
             sh "${mvnHome}/bin/mvn clean install -DskipTests"
         }
-        stage('wait and stop') {
-            hook = registerWebhook()
-            echo "Waiting for POST to ${hook.getURL()}"
-            data = waitForWebhook hook
-            echo "Webhook called with data: ${data}"
+        stage('user input') {
+            def doesJavaRock = input(message: 'Do you like Java?', ok: 'Yes',
+                    parameters: [booleanParam(defaultValue: true,
+                            description: 'If you like Java, just push the button',name: 'Yes?')])
+            echo "Java rocks?:" + doesJavaRock
         }
         stage('end') {
             echo 'waiting'
