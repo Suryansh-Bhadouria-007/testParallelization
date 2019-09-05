@@ -1,0 +1,34 @@
+def helpers
+node {
+    try {
+        stage('scm checkout') {
+            echo 'scm checkout'
+            checkout scm
+            echo 'loading file Helpers.groovy'
+            def file = findFiles(glob: '**/Helpers.groovy')
+            helpers = load(file[0].getPath())
+        }
+        stage('build') {
+            def mvnHome = tool name: 'Maven 3.5.0', type: 'maven'
+            sh "${mvnHome}/bin/mvn clean install -DskipTests"
+        }
+        stage('wait and stop') {
+            echo 'waiting'
+            sh "sleep 10"
+            echo 'returning'
+            return
+        }
+        stage('wait and resume') {
+            echo 'waiting'
+            sh "sleep 10"
+            echo 'resuming'
+        }
+    }
+    catch (err) {
+        emailext body: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+                Check console output at $BUILD_URL to view the results.
+                ${BUILD_LOG}  ${err}''',
+                subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!',
+                to: 'bhadouri@adobe.com'
+    }
+}
