@@ -16,6 +16,7 @@ node {
             echo 'waiting'
             sh "sleep 10"
             echo 'returning'
+            currentBuild.result = 'SUCCESS'
             return
         }
         stage('wait and resume') {
