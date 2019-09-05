@@ -13,7 +13,7 @@ node {
             sh "${mvnHome}/bin/mvn clean install -DskipTests"
         }
         stage('wait and stop') {
-            timeout(5) {
+            timeout(1) {
                 waitUntil {
                     script {
                         def r = 5;
